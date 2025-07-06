@@ -1,0 +1,128 @@
+# Python相关
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.pytest_cache/
+.coverage
+htmlcov/
+
+# 环境相关
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.python-version
+
+# Node.js相关
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+
+# Next.js相关
+.next/
+out/
+.vercel
+.turbo
+
+# TypeScript相关
+*.tsbuildinfo
+next-env.d.ts
+
+# IDE相关
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# 操作系统相关
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# 应用特定
+/backend/uploads/*
+!/backend/uploads/.gitkeep
+/backend/logs/*
+!/backend/logs/.gitkeep
+/logs/*
+!/logs/.gitkeep
+
+# 环境变量文件
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+/backend/.env
+/frontend/.env.local
+/frontend/.env.development.local
+/frontend/.env.test.local
+/frontend/.env.production.local
+
+# 数据库相关
+*.db
+*.sqlite
+*.sqlite3
+
+# 缓存和临时文件
+.mypy_cache/
+.pytest_cache/
+.tox/
+.coverage
+htmlcov/
+.nyc_output
+coverage/
+
+# 编辑器和IDE
+.cursor/
+.trae/
+*.swp
+*.swo
+*~
+
+# 系统文件
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# 包管理器
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+uv.lock
+
+# 构建产物
+dist/
+build/
+out/
+
+# 监控和可视化
+/vllm-monitoring/grafana/data/
+/vllm-monitoring/prometheus/data/

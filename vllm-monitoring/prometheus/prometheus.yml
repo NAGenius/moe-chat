@@ -1,0 +1,25 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+# 告警规则配置
+rule_files:
+  - 'rules.yml'
+
+# 抓取配置
+scrape_configs:
+  # vLLM服务监控
+  - job_name: 'vllm'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['host.docker.internal:8001']  # 替换为您的vLLM服务器IP和端口
+
+  # 监控Prometheus自身
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # 监控Grafana
+  - job_name: 'grafana'
+    static_configs:
+      - targets: ['grafana:3000']

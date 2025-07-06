@@ -1,0 +1,72 @@
+version: '0.1'
+
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    container_name: moe-chat-db
+    restart: always
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
+      - POSTGRES_DB=${POSTGRES_DB:-moe_chat}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - moe-chat-network
+
+  redis:
+    image: redis:latest
+    container_name: moe-chat-redis
+    restart: always
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+    networks:
+      - moe-chat-network
+
+  # celery-worker:
+  #   build:
+  #     context: ./backend
+  #     dockerfile: Dockerfile
+  #   container_name: moe-chat-celery-worker
+  #   restart: always
+  #   command: python celery_worker.py
+  #   volumes:
+  #     - ./backend/app:/app/app
+  #     - ./backend/.env:/app/.env
+  #     - ./logs:/app/logs
+  #     - ./uploads:/app/uploads
+  #   depends_on:
+  #     - db
+  #     - redis
+  #   networks:
+  #     - moe-chat-network
+
+  # flower:
+  #   build:
+  #     context: ./backend
+  #     dockerfile: Dockerfile
+  #   container_name: moe-chat-flower
+  #   restart: always
+  #   command: celery -A app.core.celery_app flower --port=5555 --address=0.0.0.0
+  #   ports:
+  #     - "5555:5555"
+  #   depends_on:
+  #     - db
+  #     - redis
+  #     - celery-worker
+  #   networks:
+  #     - moe-chat-network
+
+networks:
+  moe-chat-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+  redis-data:
